@@ -1,0 +1,19 @@
+{
+  "name": "Material Money",
+  "short_name": "M Money",
+  "manifest_version": 2,
+  "description": "A fast, offline-friendly, Material Design-inspired currency converter.",
+  "icons": [{
+        "src": "images/touch/icon-256x256.png",
+        "sizes": "256x256",
+        "type": "image/png"
+      }, {
+        "src": "images/touch/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#263238",
+  "theme_color": "#263238"
+}

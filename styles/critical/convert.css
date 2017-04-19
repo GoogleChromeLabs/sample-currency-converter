@@ -1,0 +1,276 @@
+/**
+ * Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.mm-convert__card {
+  position: relative;
+  border: none;
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px;
+}
+
+.mm-convert__valid-bg,
+.mm-convert__invalid-bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.mm-convert__invalid-bg {
+  opacity: 0;
+}
+
+.mm-convert__valid-bg {
+  background-color: var(--mdc-theme-accent, blue);
+  opacity: 1;
+}
+
+.mm-convert {
+  display: inline-block;
+}
+
+.mm-convert__block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  padding: 16px;
+}
+
+.mm-convert__block--alt {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mm-convert__label {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+
+  transition: opacity 0.2s var(--mm-default-curve);
+}
+
+.mm-convert--has-currencies .mm-convert__label {
+  opacity: 1;
+}
+
+@media (max-width: 400px) {
+  .mm-convert__label {
+    font-size: 0.75rem;
+  }
+}
+
+.mm-convert__label-spacer {
+  flex-grow: 1;
+}
+
+.mm-convert__icon {
+  margin-right: 8px;
+}
+
+.mm-convert__input {
+  display: flex;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.mm-convert__currency {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 500;
+  opacity: 1;
+  height: 3rem;
+  margin-right: 8px;
+  background: var(--mdc-theme-primary, black);
+  transition: opacity 0.2s var(--mm-default-curve);
+  text-transform: none;
+}
+.wf-active .mm-convert__currency {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+.mm-convert__vc {
+  margin: 0;
+  padding: 0;
+  border: none;
+  flex-grow: 1;
+  position: relative;
+}
+
+.mm-convert__vc::after {
+  position: absolute;
+  background: white;
+  opacity: 1;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  transition: opacity 0.2s var(--mm-default-curve);
+  z-index: 2;
+  content: "";
+}
+
+.mm-convert--has-common .mm-convert__vc::after {
+  opacity: 0;
+}
+
+.mm-convert--has-common-end .mm-convert__vc::after {
+  z-index: 0;
+}
+
+.mm-convert__update span {
+  display: flex;
+  align-items: center;
+}
+
+.mm-convert__value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: monospace;
+  font-weight: 700;
+  box-sizing: border-box;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 2.7rem;
+  background: none;
+  border: none;
+  border-radius: 2px;
+  color: #2E2E2E;
+  width: 100%;
+  outline: none;
+  padding: 0 0 0 8px;
+  z-index: 2;
+  touch-action: none;
+  -moz-appearance: textfield;
+}
+.wf-active .mm-convert__value {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.mm-convert__value::-webkit-input-placeholder {
+  color: #666666;
+}
+.mm-convert__value::-moz-placeholder {
+  color: #666666;
+}
+.mm-convert__value:-ms-input-placeholder {
+  color: #666666;
+}
+.mm-convert__value::-webkit-inner-spin-button,
+.mm-convert__value::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.mm-convert__back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.mm-convert__topbar {
+  display: flex;
+  box-sizing: border-box;
+  height: 2.7rem;
+  background: var(--mm-accent-darker, darkblue);
+  margin: 8px;
+  border: none;
+  border-radius: 2px;
+  align-items: center;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+.mm-convert__last-updated {
+  display: block;
+  flex-grow: 1;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 8px;
+}
+
+.mm-convert__last-updated em {
+  font-style: normal;
+  font-weight: 400;
+  color: white;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mm-convert__update-inner {
+  display: flex;
+}
+
+.mm-convert__update .mm-icon {
+  display: inline;
+  margin-right: 4px;
+  opacity: 0.9;
+}
+
+.mm-convert__common {
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.2s var(--mm-default-curve);
+}
+
+.mm-convert--has-common .mm-convert__common {
+  opacity: 1;
+}
+
+.mm-convert__common-title {
+  padding: 16px 16px 0 16px;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  background: var(--mm-table-shade);
+}
+
+.mm-convert__common table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mm-convert__common table thead {
+  background: var(--mm-table-shade);
+}
+
+.mm-convert__common table tr {
+  height: 3em;
+}
+
+.mm-convert__common table td {
+  padding: 0 16px;
+  border-bottom: 1px solid var(--mm-table-shade);
+}
+
+.mm-convert__error {
+  position: absolute;
+  opacity: 0;
+}
+
+.mm-snackbar {
+  z-index: 20;
+  display: none;
+}

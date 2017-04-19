@@ -1,0 +1,17 @@
+{
+  "extends": "google",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "dot-notation": 0,
+    "no-new": 1,
+    "quotes": [2, "single"],
+    "no-var": 2,
+    "no-return-assign": [2, "except-parens"]
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  }
+}

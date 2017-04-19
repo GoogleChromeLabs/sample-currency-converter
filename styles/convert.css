@@ -1,0 +1,93 @@
+/**
+ * Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import "@material/menu/dist/mdc.menu.min.css";
+@import "@material/list/dist/mdc.list.min.css";
+@import "@material/dialog/dist/mdc.dialog.min.css";
+@import "@material/snackbar/dist/mdc.snackbar.min.css";
+
+.mm-convert__invalid-bg {
+  background-color: #cccccc;
+  transition: opacity 0.3s var(--mm-default-curve);
+}
+
+.mm-convert--invalid .mm-convert__invalid-bg {
+  opacity: 1;
+}
+
+.mm-convert__error {
+  position: absolute;
+  padding: 2px 14px 4px 0;
+  color: black;
+  bottom: 0;
+  left: 112px;
+  right: 16px;
+  font-size: 0.9rem;
+  border-top: 4px solid red;
+  font-weight: 400;
+  height: 22px;
+  line-height: 24px;
+  align-items: center;
+
+  opacity: 0;
+  transition: opacity 0.2s var(--mm-default-curve);
+}
+
+.mm-convert--invalid > .mm-convert__error {
+  opacity: 1;
+}
+
+.mm-convert__error::after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: translateX(0);
+
+  transition: transform 0.2s var(--mm-default-curve);
+}
+
+.mm-convert--invalid > .mm-convert__error::after {
+  transform: translateX(100%);
+}
+
+.mm-convert__error-message {
+  position: relative;
+  display: inline-block;
+  bottom: 6px;
+  left: -4px;
+}
+
+/* Workaround for vertical centering bug
+   (https://github.com/material-components/material-components-web/issues/421)
+*/
+.mdc-dialog .mdc-dialog__surface {
+  bottom: auto;
+  position: initial;
+}
+
+.mm-app--booted .mdc-dialog {
+  display: flex;
+}
+
+.mm-app--booted .mdc-dialog--open {
+  z-index: 200;
+}
+
+.mm-snackbar {
+  display: flex;
+}

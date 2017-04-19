@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>Material Money</title>
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Material Money">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Material Money">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#263238">
+
+  <!-- Color the status bar on mobile devices -->
+  <meta name="theme-color" content="#263238">
+
+  <!-- Critical styles -->
+  <!-- {% include critical css %} -->
+</head>
+
+<body class="mm-app">
+  <header class="mdc-toolbar mdc-elevation--z4 mm-toolbar">
+    <section class="mdc-toolbar__section mdc-toolbar__section--align-start mm-toolbar__back">
+      <a class="material-icons mm-toolbar__back-button" aria-label="Back" alt="Back">
+        <img class="mm-icon" src="images/ic_arrow_back.svg">
+      </a>
+    </section>
+    <section class="mm-toolbar__appname mdc-toolbar__section mdc-toolbar__section--align-start">
+      <span class="mdc-toolbar__title">Material Money</span>
+    </section>
+    <section class="mm-toolbar__title-block mdc-toolbar__section mdc-toolbar__section--align-start">
+      <span class="mdc-toolbar__title mm-toolbar__title"></span>
+    </section>
+    <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+      <div class="mm-menu-anchor mdc-menu-anchor">
+        <a class="material-icons mm-toolbar__more" aria-label="Menu" alt="Menu">
+          <img class="mm-icon" src="images/ic_more_vert.svg">
+        </a>
+        <div class="mdc-simple-menu mdc-toolbar__menu mm-menu" tabindex="-1">
+          <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+            <li class="mdc-list-item mm-menu__settings" role="menuitem" tabindex="0">
+              Settings
+            </li>
+            <li class="mdc-list-item mm-menu__rates" role="menuitem" tabindex="0">
+              Information on rates
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <div class="mm-convert mm-screen mm-screen--hidden">
+    <div class="mm-convert__topbar mdc-elevation--z4">
+      <span class="mm-convert__last-updated">
+        <span data-mm-bind="rates.message">Loading rates, please wait...</span>
+        <em data-mm-bind="rates.relative"></em>
+      </span>
+      <button class="mdc-button mdc-button--compact mdc-button--theme-dark mm-convert__update">
+        <span>
+          <img class="mm-icon" src="images/ic_refresh.svg">Update now
+        </span>
+      </button>
+    </div>
+    <div class="mm-convert__card mdc-elevation--z4">
+      <div class="mm-convert__valid-bg"></div>
+      <div class="mm-convert__invalid-bg"></div>
+      <div id="convert-travel" class="mm-convert__block">
+        <div class="mm-convert__label">
+          <span class="mm-currency" data-mm-bind="travel.name">&nbsp;</span>&nbsp; (
+          <span class="mm-currency" data-mm-bind="travel.code">&nbsp;</span>)
+          <span class="mm-convert__label-spacer"></span>
+          <img class="mm-icon" src="images/ic_language.svg"><span><b>Travel</b> currency</span>
+        </div>
+        <div class="mm-convert__input">
+          <button class="mdc-button mdc-button--raised mdc-button--primary mm-convert__currency" data-mm-bind="travel.symbol"></button>
+          <div class="mm-convert__vc">
+            <input type="number" min="0" step="any" class="mm-convert__value" placeholder=""></input>
+            <div class="mm-convert__back mdc-elevation--z2"></div>
+          </div>
+        </div>
+        <div class="mm-convert__error" aria-hidden="true">
+          <img class="mm-icon" src="images/ic_warning.svg">
+          <span class="mm-convert__error-message">Please enter a valid number.</span>
+        </div>
+      </div>
+      <div id="convert-home" class="mm-convert__block mm-convert__block--alt">
+        <div class="mm-convert__label">
+          <span class="mm-currency" data-mm-bind="home.name">&nbsp;</span>&nbsp; (
+          <span class="mm-currency" data-mm-bind="home.code">&nbsp;</span>)
+          <span class="mm-convert__label-spacer"></span>
+          <img class="mm-icon" src="images/ic_home.svg"><span><b>Home</b> currency</span>
+        </div>
+        <div class="mm-convert__input">
+          <button class="mdc-button mdc-button--raised mdc-button--primary mm-convert__currency" data-mm-bind="home.symbol"></button>
+          <div class="mm-convert__vc">
+            <input type="number" min="0" step="any" class="mm-convert__value" placeholder=""></input>
+            <div class="mm-convert__back mdc-elevation--z2"></div>
+          </div>
+        </div>
+        <div class="mm-convert__error" aria-hidden="true">
+          <img class="mm-icon" src="images/ic_warning.svg">
+          <span class="mm-convert__error-message">Please enter a valid number.</span>
+        </div>
+      </div>
+    </div>
+    <div class="mm-convert__common">
+      <table class="mm-convert__common-table">
+        <thead>
+          <tr>
+            <td>Home</td>
+            <td>Travel</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span data-mm-bind="home.symbol"></span>
+              <span data-mm-bind="common.first.home"></span>
+            </td>
+            <td>
+              <span data-mm-bind="travel.symbol"></span>
+              <span data-mm-bind="common.first.travel"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span data-mm-bind="home.symbol"></span>
+              <span data-mm-bind="common.second.home"></span>
+            </td>
+            <td>
+              <span data-mm-bind="travel.symbol"></span>
+              <span data-mm-bind="common.second.travel"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span data-mm-bind="home.symbol"></span>
+              <span data-mm-bind="common.third.home"></span>
+            </td>
+            <td>
+              <span data-mm-bind="travel.symbol"></span>
+              <span data-mm-bind="common.third.travel"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="mm-select mm-screen mm-screen--disabled">
+    <ul class="mm-select__list mdc-list mdc-list--avatar-list mdc-list--theme-dark mdc-theme--primary-bg">
+    </ul>
+  </div>
+
+  <div class="mm-settings mm-screen mm-screen--disabled">
+    <div class="mdc-list-group">
+      <h3 class="mdc-list-group__subheader mm-settings__group">Location</h3>
+      <div class="mm-settings__entry">
+        <div class="mm-settings__entry-text">
+          <label for="mm-settings-geo" class="mdc-switch-label mm-settings__entry-label">Suggest travel currencies</label>
+          <div class="mm-settings__entry-details">
+            In order to automatically suggest travel currencies, we need access to your location data.
+          </div>
+        </div>
+        <div class="mdc-switch">
+          <input type="checkbox" id="mm-settings-geo" class="mdc-switch__native-control" />
+          <div class="mdc-switch__background">
+            <div class="mdc-switch__knob"></div>
+          </div>
+        </div>
+      </div>
+      <hr class="mdc-list-divider">
+    </div>
+
+    <div class="mdc-list-group">
+      <h3 class="mdc-list-group__subheader mm-settings__group">Notifications</h3>
+      <div class="mm-settings__entry">
+        <div class="mm-settings__entry-text">
+          <label for="mm-settings-notify" class="mdc-switch-label mm-settings__entry-label">
+            Notify when rates are updated
+          </label>
+        </div>
+        <div class="mdc-switch">
+          <input type="checkbox" id="mm-settings-notify" class="mdc-switch__native-control" />
+          <div class="mdc-switch__background">
+            <div class="mdc-switch__knob"></div>
+          </div>
+        </div>
+      </div>
+      <hr class="mdc-list-divider">
+    </div>
+
+    <div class="mdc-list-group">
+      <h3 class="mdc-list-group__subheader mm-settings__group">Common values (denominations)</h3>
+      <div class="mm-settings__entry">
+        <span class="mm-settings__common-symbol" data-mm-bind="home.symbol"></span>
+        <div class="mm-settings__common-value-container">
+          <div class="mdc-textfield mm-js-common-value mm-settings__common-value">
+            <input required type="number" min="0" step="any" class="mdc-textfield__input" id="mm-settings-first" value="1">
+            <label for="mm-settings-first" class="mdc-textfield__label">First</label>
+          </div>
+          <p class="mdc-textfield-helptext mdc-textfield-helptext--validation-msg" role="alert">
+            You need to enter a number
+          </p>
+        </div>
+      </div>
+      <div class="mm-settings__entry">
+        <span class="mm-settings__common-symbol" data-mm-bind="home.symbol"></span>
+        <div class="mm-settings__common-value-container">
+          <div class="mdc-textfield mm-js-common-value mm-settings__common-value">
+            <input required type="number" min="0" step="any" class="mdc-textfield__input" id="mm-settings-second" value="20">
+            <label for="mm-settings-second" class="mdc-textfield__label">Second</label>
+          </div>
+          <p class="mdc-textfield-helptext mdc-textfield-helptext--validation-msg" role="alert">
+            You need to enter a number
+          </p>
+        </div>
+      </div>
+      <div class="mm-settings__entry">
+        <span class="mm-settings__common-symbol" data-mm-bind="home.symbol"></span>
+        <div class="mm-settings__common-value-container">
+          <div class="mdc-textfield mm-js-common-value mm-settings__common-value">
+            <input required type="number" min="0" step="any" class="mdc-textfield__input" id="mm-settings-third" value="50">
+            <label for="mm-settings-third" class="mdc-textfield__label">Third</label>
+          </div>
+          <p class="mdc-textfield-helptext mdc-textfield-helptext--validation-msg" role="alert">
+            You need to enter a number
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mm-animation">
+    <div class="mm-animation__ruler"></div>
+    <div class="mm-animation__clip">
+      <div class="mm-animation__item"></div>
+    </div>
+    <div class="mm-animation__hero"></div>
+  </div>
+
+  <div class="mm-loading">
+    Please wait while the application loads.
+  </div>
+
+  <aside id="mm-rates-dialog"
+    class="mdc-dialog"
+    role="alertdialog"
+    aria-hidden="true"
+    aria-labelledby="mm-rates-dialog-label"
+    aria-describedby="mm-rates-dialog-description">
+    <div class="mdc-dialog__surface">
+      <header class="mdc-dialog__header">
+        <h2 id="mm-rates-dialog-label" class="mdc-dialog__header__title">
+          How rates are updated
+        </h2>
+      </header>
+      <section id="mm-rates-dialog-description" class="mdc-dialog__body">
+        The rates used are provided by the
+        <a target="_blank" href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">
+          European Central Bank</a>.
+        They are usually updated at 14:15 CET on working days only, so the latest rates may be a few days old.
+        <br><br>
+        <b>Current rates published <span data-mm-bind="rates.relative"></span> (<span data-mm-bind="rates.date"></span>).</b>
+      </section>
+      <footer class="mdc-dialog__footer">
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Close</button>
+      </footer>
+    </div>
+    <div class="mdc-dialog__backdrop"></div>
+  </aside>
+
+  <div class="mdc-snackbar mm-snackbar"
+      aria-live="assertive"
+      aria-atomic="true"
+      aria-hidden="true">
+    <div class="mdc-snackbar__text"></div>
+    <div class="mdc-snackbar__action-wrapper">
+      <button type="button" class="mdc-button mdc-snackbar__action-button"></button>
+    </div>
+  </div>
+
+  <!-- {% include main js %} -->
+
+  <!-- Register Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    }
+  </script>
+</body>

@@ -1,0 +1,116 @@
+/**
+ * Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import "@material/theme/dist/mdc.theme.min.css";
+@import "@material/elevation/dist/mdc.elevation.min.css";
+@import "@material/toolbar/dist/mdc.toolbar.min.css";
+@import "@material/button/dist/mdc.button.min.css";
+
+:root {
+  --mdc-theme-primary: #263238;
+  --mdc-theme-accent: #00AE9E;
+  --mdc-theme-background: white;
+
+  --mm-accent-darker: #006064;
+  --mm-default-curve: cubic-bezier(0.4, 0, 0.2, 1);
+  --mm-table-shade: #f0f0f0;
+}
+
+html, body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: var(--mdc-theme-background, white);
+  height: 100%;
+}
+
+.mdc-simple-menu {
+  display: none;
+}
+
+.mm-app {
+  display: flex;
+  color: white;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+}
+.wf-active .mm-app {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+.mm-toolbar {
+  position: fixed;
+  z-index: 10;
+}
+
+.mm-toolbar__back {
+  opacity: 0;
+  transition: opacity 0.4s var(--mm-default-curve);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mm-toolbar__back .material-icons {
+  height: 24px;
+}
+
+.mm-toolbar__title-block,
+.mm-toolbar__appname {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  bottom: 0;
+  height: 32px;
+  margin: auto;
+
+  transform: translateX(0);
+  transition: transform 0.4s var(--mm-default-curve),
+      opacity 0.4s var(--mm-default-curve);
+}
+
+.mm-toolbar__appname {
+  z-index: 15;
+  opacity: 1;
+}
+
+.mm-toolbar__title-block {
+  z-index: 16;
+  opacity: 0;
+}
+
+.mm-toolbar__more {
+  opacity: 1;
+  transition: opacity 0.4s var(--mm-default-curve);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mm-menu {
+  z-index: 15;
+}
+
+.mm-icon {
+  margin-right: 8px;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.mdc-dialog {
+  display: none;
+  color: rgba(0, 0, 0, 0.8);
+}
