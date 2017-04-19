@@ -9,6 +9,8 @@ It uses components from the
 [Material Components for the web](https://github.com/material-components/material-components-web) (MDC-Web)
 project.
 
+![home_small](https://cloud.githubusercontent.com/assets/409615/25181665/2a6b2b86-250a-11e7-9400-9a6c8d34468c.png)
+
 ## Development
 
 ### Installing dependencies
