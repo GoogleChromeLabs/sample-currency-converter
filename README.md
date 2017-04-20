@@ -1,3 +1,5 @@
+**Please note: This app is still being developed. It's mobile-focused for now, and there may be bugs.**
+
 # Material Money
 
 This is a sample Progressive Web App (PWA), designed to illustrate some best
