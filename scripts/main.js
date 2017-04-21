@@ -445,6 +445,13 @@ class App {
           this._updateRateInfo();
           ratesDialog.show();
         });
+
+    const aboutDialog =
+        new MDCDialog(document.querySelector('#mm-about-dialog'));
+    document.querySelector('.mm-menu__about').addEventListener('click', () => {
+      this._updateRateInfo();
+      aboutDialog.show();
+    });
   }
 
   /**

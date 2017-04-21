@@ -61,6 +61,9 @@
             <li class="mdc-list-item mm-menu__rates" role="menuitem" tabindex="0">
               Information on rates
             </li>
+            <li class="mdc-list-item mm-menu__about" role="menuitem" tabindex="0">
+              About this app
+            </li>
           </ul>
         </div>
       </div>
@@ -280,6 +283,32 @@
         They are usually updated at 14:15 CET on working days only, so the latest rates may be a few days old.
         <br><br>
         <b>Current rates published <span data-mm-bind="rates.relative"></span> (<span data-mm-bind="rates.date"></span>).</b>
+      </section>
+      <footer class="mdc-dialog__footer">
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Close</button>
+      </footer>
+    </div>
+    <div class="mdc-dialog__backdrop"></div>
+  </aside>
+
+  <aside id="mm-about-dialog"
+    class="mdc-dialog"
+    role="alertdialog"
+    aria-hidden="true"
+    aria-labelledby="mm-about-dialog-label"
+    aria-describedby="mm-about-dialog-description">
+    <div class="mdc-dialog__surface">
+      <header class="mdc-dialog__header">
+        <h2 id="mm-about-dialog-label" class="mdc-dialog__header__title">
+          About this app
+        </h2>
+      </header>
+      <section id="mm-about-dialog-description" class="mdc-dialog__body">
+        This app is an open-source project. You can find all of the code
+        <a target="_blank" href="https://github.com/GoogleChrome/sample-currency-converter">on GitHub</a>.
+        <br><br>
+        Copyright 2016 Google Inc.<br>
+        License: <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2</a>.
       </section>
       <footer class="mdc-dialog__footer">
         <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Close</button>
