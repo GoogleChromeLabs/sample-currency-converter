@@ -39,4 +39,5 @@ gulp serve
 
 ## Team
 [Sérgio Gomes](https://github.com/sgomes) - UX Engineer
+
 [Mustafa Kurtuldu](https://github.com/mustafa-x) - UX Designer
