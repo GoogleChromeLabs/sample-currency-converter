@@ -579,6 +579,7 @@ class App {
         this.setAppTitle();
       }
     }
+    this.transitioning = false;
   }
 
   /**

@@ -120,7 +120,6 @@ export class SelectView {
           if ('history' in window) {
             this._app.transitioning = true;
             history.back();
-            this._app.transitioning = false;
           }
 
           this._app.setAppTitle();
