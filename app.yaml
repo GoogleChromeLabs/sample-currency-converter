@@ -21,10 +21,17 @@ handlers:
   script: _go_app
   secure: always
 
+- url: /sw.js
+  static_files: sw.js
+  upload: sw.js
+  secure: always
+  expiration: 0s
+
 - url: /$
   static_files: index.html
   upload: index\.html
   secure: always
+  expiration: 0s
   http_headers:
     Link: </data/currencies.json>; rel=preload, </data/country-currencies.json>; rel=preload
 
