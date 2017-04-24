@@ -13,6 +13,8 @@ project.
 
 ![home_small](https://cloud.githubusercontent.com/assets/409615/25181665/2a6b2b86-250a-11e7-9400-9a6c8d34468c.png)
 
+Try it out live at [material.money](https://material.money)!
+
 ## Development
 
 ### Installing dependencies
