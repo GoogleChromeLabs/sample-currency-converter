@@ -155,7 +155,7 @@
   color: #2E2E2E;
   width: 100%;
   outline: none;
-  padding: 0 0 0 8px;
+  margin: 0 0 0 8px;
   z-index: 2;
   touch-action: none;
   -moz-appearance: textfield;
