@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -39,7 +39,7 @@
   <header class="mdc-toolbar mdc-elevation--z4 mm-toolbar">
     <section class="mdc-toolbar__section mdc-toolbar__section--align-start mm-toolbar__back">
       <a class="material-icons mm-toolbar__back-button" aria-label="Back" alt="Back">
-        <img class="mm-icon" src="images/ic_arrow_back.svg">
+        <img alt="Back" class="mm-icon" src="images/ic_arrow_back.svg">
       </a>
     </section>
     <section class="mm-toolbar__appname mdc-toolbar__section mdc-toolbar__section--align-start">
@@ -51,7 +51,7 @@
     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
       <div class="mm-menu-anchor mdc-menu-anchor">
         <a class="material-icons mm-toolbar__more" aria-label="Menu" alt="Menu">
-          <img class="mm-icon" src="images/ic_more_vert.svg">
+          <img alt="More" class="mm-icon" src="images/ic_more_vert.svg">
         </a>
         <div class="mdc-simple-menu mdc-toolbar__menu mm-menu" tabindex="-1">
           <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
@@ -78,7 +78,7 @@
       </span>
       <button class="mdc-button mdc-button--compact mdc-button--theme-dark mm-convert__update">
         <span>
-          <img class="mm-icon" src="images/ic_refresh.svg">Update now
+          <img alt="Refresh" class="mm-icon" src="images/ic_refresh.svg">Update now
         </span>
       </button>
     </div>
@@ -90,17 +90,17 @@
           <span class="mm-currency" data-mm-bind="travel.name">&nbsp;</span>&nbsp; (
           <span class="mm-currency" data-mm-bind="travel.code">&nbsp;</span>)
           <span class="mm-convert__label-spacer"></span>
-          <img class="mm-icon" src="images/ic_language.svg"><span><b>Travel</b> currency</span>
+          <img alt="Travel" class="mm-icon" src="images/ic_language.svg"><span><b>Travel</b> currency</span>
         </div>
         <div class="mm-convert__input">
           <button class="mdc-button mdc-button--raised mdc-button--primary mm-convert__currency" data-mm-bind="travel.symbol"></button>
           <div class="mm-convert__vc">
-            <input type="number" min="0" step="any" class="mm-convert__value" placeholder=""></input>
+            <input type="number" min="0" step="any" class="mm-convert__value" placeholder="" aria-label="Travel currency amount"></input>
             <div class="mm-convert__back mdc-elevation--z2"></div>
           </div>
         </div>
         <div class="mm-convert__error" aria-hidden="true">
-          <img class="mm-icon" src="images/ic_warning.svg">
+          <img alt="Warning" class="mm-icon" src="images/ic_warning.svg">
           <span class="mm-convert__error-message">Please enter a valid number.</span>
         </div>
       </div>
@@ -109,17 +109,17 @@
           <span class="mm-currency" data-mm-bind="home.name">&nbsp;</span>&nbsp; (
           <span class="mm-currency" data-mm-bind="home.code">&nbsp;</span>)
           <span class="mm-convert__label-spacer"></span>
-          <img class="mm-icon" src="images/ic_home.svg"><span><b>Home</b> currency</span>
+          <img alt="Home" class="mm-icon" src="images/ic_home.svg"><span><b>Home</b> currency</span>
         </div>
         <div class="mm-convert__input">
           <button class="mdc-button mdc-button--raised mdc-button--primary mm-convert__currency" data-mm-bind="home.symbol"></button>
           <div class="mm-convert__vc">
-            <input type="number" min="0" step="any" class="mm-convert__value" placeholder=""></input>
+            <input type="number" min="0" step="any" class="mm-convert__value" placeholder="" aria-label="Home currency amount"></input>
             <div class="mm-convert__back mdc-elevation--z2"></div>
           </div>
         </div>
         <div class="mm-convert__error" aria-hidden="true">
-          <img class="mm-icon" src="images/ic_warning.svg">
+          <img alt="Warning" class="mm-icon" src="images/ic_warning.svg">
           <span class="mm-convert__error-message">Please enter a valid number.</span>
         </div>
       </div>
@@ -278,7 +278,7 @@
       </header>
       <section id="mm-rates-dialog-description" class="mdc-dialog__body">
         The rates used are provided by the
-        <a target="_blank" href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">
+        <a target="_blank" rel="noopener" href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">
           European Central Bank</a>.
         They are usually updated at 14:15 CET on working days only, so the latest rates may be a few days old.
         <br><br>
@@ -305,10 +305,10 @@
       </header>
       <section id="mm-about-dialog-description" class="mdc-dialog__body">
         This app is an open-source project. You can find all of the code
-        <a target="_blank" href="https://github.com/GoogleChrome/sample-currency-converter">on GitHub</a>.
+        <a target="_blank" rel="noopener" href="https://github.com/GoogleChrome/sample-currency-converter">on GitHub</a>.
         <br><br>
         Copyright 2016 Google Inc.<br>
-        License: <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2</a>.
+        License: <a target="_blank" rel="noopener" href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2</a>.
       </section>
       <footer class="mdc-dialog__footer">
         <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Close</button>
