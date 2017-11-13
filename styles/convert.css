@@ -72,14 +72,6 @@
   left: -4px;
 }
 
-/* Workaround for vertical centering bug
-   (https://github.com/material-components/material-components-web/issues/421)
-*/
-.mdc-dialog .mdc-dialog__surface {
-  bottom: auto;
-  position: initial;
-}
-
 .mm-app--booted .mdc-dialog {
   display: flex;
 }

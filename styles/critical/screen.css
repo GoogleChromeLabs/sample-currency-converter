@@ -27,7 +27,7 @@
   width: 100vw;
   max-width: 30rem;
   z-index: 2;
-  padding-top: 56px;
+  padding-top: 60px;
   transition: opacity 0.4s var(--mm-default-curve);
 }
 

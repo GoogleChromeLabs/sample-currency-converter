@@ -98,6 +98,7 @@
   background: var(--mdc-theme-primary, black);
   transition: opacity 0.2s var(--mm-default-curve);
   text-transform: none;
+  min-width: 88px;
 }
 .wf-active .mm-convert__currency {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -137,6 +138,7 @@
 .mm-convert__update span {
   display: flex;
   align-items: center;
+  color: white;
 }
 
 .mm-convert__value {

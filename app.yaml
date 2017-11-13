@@ -33,7 +33,7 @@ handlers:
   secure: always
   expiration: 0s
   http_headers:
-    Link: </data/currencies.json>; rel=preload, </data/country-currencies.json>; rel=preload
+    Link: </data/currencies.json>; rel=preload; as=fetch; crossorigin; nopush, </data/country-currencies.json>; rel=preload; as=fetch; crossorigin; nopush
 
 - url: /(.+\.css)
   static_files: \1

@@ -36,10 +36,17 @@ html, body {
   border: none;
   background: var(--mdc-theme-background, white);
   height: 100%;
+  /* Disable pull-to-refresh in supporting browsers. */
+  overscroll-behavior-y: contain;
 }
 
 .mdc-simple-menu {
   display: none;
+}
+
+/* Fix menu bug. See https://github.com/material-components/material-components-web/issues/1387 */
+.mdc-simple-menu--animating {
+  overflow-y: hidden !important;
 }
 
 .mm-app {
@@ -61,8 +68,11 @@ html, body {
 .mm-toolbar__back {
   opacity: 0;
   transition: opacity 0.4s var(--mm-default-curve);
-  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+}
+
+.mm-toolbar__back-button {
+  cursor: pointer;
 }
 
 .mm-toolbar__back .material-icons {
@@ -72,7 +82,7 @@ html, body {
 .mm-toolbar__title-block,
 .mm-toolbar__appname {
   position: absolute;
-  left: 16px;
+  left: 0;
   top: 0;
   bottom: 0;
   height: 32px;
@@ -102,6 +112,10 @@ html, body {
 
 .mm-menu {
   z-index: 15;
+}
+
+.mm-menu-anchor {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mm-icon {

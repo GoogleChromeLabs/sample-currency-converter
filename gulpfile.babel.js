@@ -16,6 +16,7 @@
 
 import fs from 'fs';
 import del from 'del';
+import path from 'path';
 import cssnano from 'cssnano';
 import atImport from 'postcss-import';
 import cssnext from 'postcss-cssnext';
@@ -28,24 +29,20 @@ import htmlmin from 'gulp-htmlmin';
 import rev from 'gulp-rev';
 import revReplace from 'gulp-rev-replace';
 import postcss from 'gulp-postcss';
-import sourcemaps from 'gulp-sourcemaps';
 import concat from 'gulp-concat';
-import rollup from 'gulp-better-rollup';
 
-import babel from 'rollup-plugin-babel';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+import webpack from 'webpack';
+import MinifyPlugin from 'babel-minify-webpack-plugin';
 
 const DATA = ['data/*.json'];
-const MAIN_SCRIPT = ['scripts/main.js'];
-const VIEWS = ['scripts/views/*.js'];
 const CRITICAL_STYLES = ['styles/critical/main.css'];
 const STYLES = ['styles/*.css'];
 const IMAGES = ['images/**/*.{svg,png}'];
 const ROOT = ['*.{txt,ico,go}', 'manifest.json', 'sw.js', 'app.yaml'];
 const HTML = ['index.html'];
 
-const BROWSERS = ['last 2 versions', 'not ie <= 11', 'not ie_mob <= 11'];
+const BROWSERS = ['last 2 Chrome versions', 'last 2 Firefox versions',
+  'last 2 Safari versions', '> 1%', 'not last 2 OperaMini versions'];
 const CSS_AT_IMPORT = [atImport()];
 const CSS_NEXT = [
   cssnext({browsers: BROWSERS, features: {
@@ -105,59 +102,54 @@ gulp.task('styles-min', ['styles'], () => {
     .pipe(gulp.dest('dist/styles'));
 });
 
-gulp.task('main-script', () => {
-  return gulp.src(MAIN_SCRIPT)
-    .pipe(rollup({
-      plugins: [
-        babel({
-          babelrc: false,
-          plugins: ['external-helpers'],
-          presets: [
-            ['env', {
-              targets: {
-                browsers: BROWSERS,
+gulp.task('webpack', (callback) => {
+  // Run WebPack.
+  webpack([
+    {
+      entry: {
+        main: './scripts/main.js',
+      },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                shouldPrintComment: () => false,
+                compact: true,
+                presets: [['env', {
+                  targets: {
+                    browsers: BROWSERS,
+                  },
+                  modules: false,
+                }]],
+                plugins: ['syntax-dynamic-import'],
               },
-              modules: false,
-            }],
-            ['babili'],
-          ],
-        }),
-        nodeResolve({main: true}),
-        commonjs({
-          namedExports: {
-            'node_modules/webfontloader/webfontloader.js': ['WebFont'],
+            },
           },
-        }),
+        ],
+      },
+      plugins: [
+        new MinifyPlugin({simplify: false, mangle: false}),
       ],
-    }, 'iife'))
-    .pipe(gulp.dest('.temp/scripts'));
+      output: {
+        filename: 'scripts/[name].js',
+        chunkFilename: 'scripts/views/view-[name].js',
+        path: path.resolve(__dirname, '.temp/'),
+      },
+    },
+  ], function(err, stats) {
+    if (err) {
+      throw new gutil.PluginError('webpack', err);
+    }
+    callback();
+  });
 });
 
-gulp.task('views', ['main-script'], () => {
-  return gulp.src(VIEWS)
-    .pipe(sourcemaps.init())
-    .pipe(rollup({
-      plugins: [
-        babel({
-          babelrc: false,
-          presets: [
-            ['env', {
-              targets: {
-                browsers: BROWSERS,
-              },
-              modules: false,
-            }],
-            ['babili'],
-          ],
-        }),
-        nodeResolve({main: true}),
-      ],
-    }, {
-      format: 'iife',
-      moduleName: 'Views',
-    }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/scripts/views'));
+gulp.task('scripts', ['webpack'], () => {
+  return gulp.src('.temp/scripts/views/**/*')
+      .pipe(gulp.dest('dist/scripts/views'));
 });
 
 gulp.task('data', () => {
@@ -219,7 +211,7 @@ gulp.task('html', () => {
 gulp.task('build', (callback) => {
   runSequence(
     'clean',
-    ['styles-min', 'views', 'data', 'images'],
+    ['styles-min', 'scripts', 'data', 'images'],
     ['root', 'html'],
     callback
   );
@@ -234,7 +226,7 @@ gulp.task('deploy', ['build'], () => {
 
 gulp.task('serve', ['build'], () => {
   return gulp.src('dist')
-    .pipe(shell('goapp serve',
+    .pipe(shell('dev_appserver.py app.yaml',
         {cwd: 'dist'}
   ));
 });

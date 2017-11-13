@@ -2,7 +2,7 @@
   "presets": [
     ["env", {
       "targets": {
-        "browsers": ["last 2 versions", "not ie <= 11", "not ie_mob <= 11"]
+        "browsers": ["last 2 Chrome versions", "last 2 Firefox versions", "last 2 Safari versions", "> 1%", "not last 2 OperaMini versions"]
       }
     }]
   ]

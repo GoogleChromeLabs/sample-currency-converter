@@ -24,8 +24,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/urlfetch"
+	"appengine"
+	"appengine/urlfetch"
 )
 
 // RateURL is the endpoint for European Central Bank rates.

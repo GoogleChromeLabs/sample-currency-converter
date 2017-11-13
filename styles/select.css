@@ -38,6 +38,10 @@
   z-index: 2;
 }
 
+.mm-select__item {
+  overflow: visible;
+}
+
 .mm-select__item-symbol {
   background: var(--mdc-theme-accent, #009688);
   border-radius: 50%;

@@ -15,7 +15,6 @@
  */
 
 import loadAndInjectStyles from './css-loader';
-import loadView from './view-loader';
 import noPullToRefresh from './no-pull-to-refresh';
 
 import AnimationHelper from './animation-helper';
@@ -72,6 +71,9 @@ class App {
 
     // Public property. Used for views to set transitioning state.
     this.transitioning = false;
+
+    // Will hold view classes once they load.
+    this._viewClasses = {};
 
     // Screen element references.
     this._screens = {
@@ -403,14 +405,16 @@ class App {
     });
 
     // Lazily load view JS.
-    this._selectViewPromise = loadView(VIEW_JS.SELECT)
+    this._selectViewPromise = import('./views/select.js')
+        .then((module) => this._viewClasses.SelectView = module.SelectView)
         .then(() => this._booted)
-        .then(() => new Views.SelectView(this, this._model,
+        .then(() => new this._viewClasses.SelectView(this, this._model,
             this._screens.select, this._animationHelper));
 
-    this._settingsViewPromise = loadView(VIEW_JS.SETTINGS)
+    this._settingsViewPromise = import('./views/settings.js')
+        .then((module) => this._viewClasses.SettingsView = module.SettingsView)
         .then(() => this._booted)
-        .then(() => new Views.SettingsView(this, this._model,
+        .then(() => new this._viewClasses.SettingsView(this, this._model,
             this._screens.settings, this._animationHelper));
 
     this._booted.then(() => this._hideLoadingScreen());

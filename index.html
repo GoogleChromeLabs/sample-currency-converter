@@ -37,37 +37,39 @@
 
 <body class="mm-app">
   <header class="mdc-toolbar mdc-elevation--z4 mm-toolbar">
-    <section class="mdc-toolbar__section mdc-toolbar__section--align-start mm-toolbar__back">
-      <a class="material-icons mm-toolbar__back-button" aria-label="Back" alt="Back">
-        <img alt="Back" class="mm-icon" src="images/ic_arrow_back.svg">
-      </a>
-    </section>
-    <section class="mm-toolbar__appname mdc-toolbar__section mdc-toolbar__section--align-start">
-      <span class="mdc-toolbar__title">Material Money</span>
-    </section>
-    <section class="mm-toolbar__title-block mdc-toolbar__section mdc-toolbar__section--align-start">
-      <span class="mdc-toolbar__title mm-toolbar__title"></span>
-    </section>
-    <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-      <div class="mm-menu-anchor mdc-menu-anchor">
-        <a class="material-icons mm-toolbar__more" aria-label="Menu" alt="Menu">
-          <img alt="More" class="mm-icon" src="images/ic_more_vert.svg">
-        </a>
-        <div class="mdc-simple-menu mdc-toolbar__menu mm-menu" tabindex="-1">
-          <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
-            <li class="mdc-list-item mm-menu__settings" role="menuitem" tabindex="0">
-              Settings
-            </li>
-            <li class="mdc-list-item mm-menu__rates" role="menuitem" tabindex="0">
-              Information on rates
-            </li>
-            <li class="mdc-list-item mm-menu__about" role="menuitem" tabindex="0">
-              About this app
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <div class="mdc-toolbar__row">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-start mm-toolbar__back">
+          <a class="material-icons mdc-toolbar__menu-icon mm-toolbar__back-button" aria-label="Back" alt="Back">
+            <img alt="Back" src="images/ic_arrow_back.svg">
+          </a>
+        </section>
+        <section class="mm-toolbar__appname mdc-toolbar__section mdc-toolbar__section--align-start">
+          <span class="mdc-toolbar__title">Material Money</span>
+        </section>
+        <section class="mm-toolbar__title-block mdc-toolbar__section mdc-toolbar__section--align-start">
+          <span class="mdc-toolbar__title mm-toolbar__title"></span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+          <div class="mm-menu-anchor mdc-menu-anchor mdc-toolbar__icon">
+            <a class="material-icons mm-toolbar__more" aria-label="Menu" alt="Menu">
+              <img alt="More" src="images/ic_more_vert.svg">
+            </a>
+            <div class="mdc-simple-menu mdc-toolbar__menu mm-menu" tabindex="-1">
+              <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                <li class="mdc-list-item mm-menu__settings" role="menuitem" tabindex="0">
+                  Settings
+                </li>
+                <li class="mdc-list-item mm-menu__rates" role="menuitem" tabindex="0">
+                  Information on rates
+                </li>
+                <li class="mdc-list-item mm-menu__about" role="menuitem" tabindex="0">
+                  About this app
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+    </div>
   </header>
 
   <div class="mm-convert mm-screen mm-screen--hidden">

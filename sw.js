@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const APP_CACHE = 'material-money-v7';
+const APP_CACHE = 'material-money-v8';
 const RATE_URL = '/rates';
 
 // Cached files
@@ -24,8 +24,8 @@ const urlsToCache = [
   '/manifest.json',
   '/data/country-currencies.json',
   '/data/currencies.json',
-  '/scripts/views/select.js',
-  '/scripts/views/settings.js',
+  '/scripts/views/view-0.js',
+  '/scripts/views/view-1.js',
   '/styles/styles.min.css',
   '/images/ic_arrow_back.svg',
   '/images/ic_home.svg',
