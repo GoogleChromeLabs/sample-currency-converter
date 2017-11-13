@@ -219,7 +219,7 @@ gulp.task('build', (callback) => {
 
 gulp.task('deploy', ['build'], () => {
   return gulp.src('dist')
-    .pipe(shell('goapp deploy -application material-money -version v3',
+    .pipe(shell('gcloud app deploy --no-promote --project material-money --version v3',
         {cwd: 'dist'}
   ));
 });

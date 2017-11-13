@@ -24,7 +24,7 @@
 }
 
 .mm-settings__group {
-  color: var(--mdc-theme-accent, blue);
+  color: var(--mdc-theme-secondary, blue);
 }
 
 .mm-settings__entry {
@@ -63,7 +63,7 @@
   width: 32px;
   line-height: 64px;
   font-size: 1.5rem;
-  color: var(--mdc-theme-accent, blue);
+  color: var(--mdc-theme-secondary, blue);
 }
 
 /* Tweak switch control so that it doesn't show highlight. */

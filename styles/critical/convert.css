@@ -35,7 +35,7 @@
 }
 
 .mm-convert__valid-bg {
-  background-color: var(--mdc-theme-accent, blue);
+  background-color: var(--mdc-theme-secondary, blue);
   opacity: 1;
 }
 
