@@ -277,3 +277,9 @@
   z-index: 20;
   display: none;
 }
+
+/* Bugfix */
+.mdc-snackbar__action-button {
+  color: var(--mdc-theme-secondary, blue) !important;
+  background-color: transparent !important;
+}

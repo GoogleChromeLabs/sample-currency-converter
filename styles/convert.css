@@ -79,7 +79,3 @@
 .mm-app--booted .mdc-dialog--open {
   z-index: 200;
 }
-
-.mm-snackbar {
-  display: flex;
-}
