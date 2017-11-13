@@ -99,7 +99,18 @@ gulp.task('styles-min', ['styles'], () => {
   return gulp.src('.temp/styles/styles.css')
     .pipe(concat('styles.min.css'))
     .pipe(postcss(CSS_NANO))
-    .pipe(gulp.dest('dist/styles'));
+    .pipe(gulp.dest('.temp/styles'));
+});
+
+gulp.task('styles-rev', ['styles-min'], () => {
+  return gulp.src('.temp/styles/styles.min.css')
+    .pipe(rev())
+    .pipe(gulp.dest('dist/styles'))
+    .pipe(rev.manifest(REV_MANIFEST, {
+      base: '.temp',
+      merge: true,
+    }))
+    .pipe(gulp.dest('.temp'));
 });
 
 gulp.task('webpack', (callback) => {
@@ -178,7 +189,7 @@ gulp.task('root', () => {
   return gulp.src(ROOT)
     // Replace links with revisioned URLs.
     .pipe(revReplace({
-      replaceInExtensions: ['.js', '.yaml', '.json', '.txt'],
+      replaceInExtensions: ['.js', '.yaml', '.json', '.txt', '.html'],
       manifest: gulp.src(REV_MANIFEST),
     }))
     .pipe(gulp.dest('dist/'));
@@ -211,7 +222,7 @@ gulp.task('html', () => {
 gulp.task('build', (callback) => {
   runSequence(
     'clean',
-    ['styles-min', 'scripts', 'data', 'images'],
+    ['styles-rev', 'scripts', 'data', 'images'],
     ['root', 'html'],
     callback
   );

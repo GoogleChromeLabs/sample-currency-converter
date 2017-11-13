@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const APP_CACHE = 'material-money-v8';
+const APP_CACHE = 'material-money-v9';
 const RATE_URL = '/rates';
 
 // Cached files
