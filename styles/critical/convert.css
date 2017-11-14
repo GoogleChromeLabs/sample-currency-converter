@@ -145,12 +145,13 @@
   position: absolute;
   top: 0;
   left: 0;
+  padding: 0;
   font-family: monospace;
   font-weight: 700;
   box-sizing: border-box;
   height: 3rem;
-  line-height: 3rem;
-  font-size: 2.7rem;
+  line-height: normal;
+  font-size: 2.4rem;
   background: none;
   border: none;
   border-radius: 2px;
@@ -257,6 +258,7 @@
 
 .mm-convert__common table thead {
   background: var(--mm-table-shade);
+  font-weight: 500;
 }
 
 .mm-convert__common table tr {
@@ -278,8 +280,12 @@
   display: none;
 }
 
-/* Bugfix */
+/* Bugfixes */
 .mdc-snackbar__action-button {
   color: var(--mdc-theme-secondary, blue) !important;
   background-color: transparent !important;
+}
+
+.mdc-dialog .mdc-dialog__footer .mdc-dialog__footer__button::before {
+  background-color: rgba(0, 174, 158, 0.16);
 }
