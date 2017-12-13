@@ -40,6 +40,7 @@ const STYLES = ['styles/*.css'];
 const IMAGES = ['images/**/*.{svg,png}'];
 const ROOT = ['*.{txt,ico,go}', 'manifest.json', 'sw.js', 'app.yaml'];
 const HTML = ['index.html'];
+const WELL_KNOWN = ['well_known/**.*'];
 
 const BROWSERS = ['last 2 Chrome versions', 'last 2 Firefox versions',
   'last 2 Safari versions', '> 1%', 'not last 2 OperaMini versions'];
@@ -219,10 +220,14 @@ gulp.task('html', () => {
     .pipe(gulp.dest('dist/'));
 });
 
+gulp.task('wellknown', () => {
+  return gulp.src(WELL_KNOWN).pipe(gulp.dest('dist/.well-known/'));
+});
+
 gulp.task('build', (callback) => {
   runSequence(
     'clean',
-    ['styles-rev', 'scripts', 'data', 'images'],
+    ['styles-rev', 'scripts', 'data', 'images', 'wellknown'],
     ['root', 'html'],
     callback
   );
