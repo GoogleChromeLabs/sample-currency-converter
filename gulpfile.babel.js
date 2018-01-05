@@ -221,7 +221,7 @@ gulp.task('html', () => {
 });
 
 gulp.task('wellknown', () => {
-  return gulp.src(WELL_KNOWN).pipe(gulp.dest('dist/.well-known/'));
+  return gulp.src(WELL_KNOWN).pipe(gulp.dest('dist/well-known/'));
 });
 
 gulp.task('build', (callback) => {

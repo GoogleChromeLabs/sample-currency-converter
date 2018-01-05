@@ -27,6 +27,10 @@ handlers:
   secure: always
   expiration: 0s
 
+- url: /.well-known
+  static_dir: well-known
+  secure: always
+
 - url: /$
   static_files: index.html
   upload: index\.html
