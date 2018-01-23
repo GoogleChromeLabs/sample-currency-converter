@@ -20,6 +20,7 @@ Try it out live at [material.money](https://material.money)!
 ### Installing dependencies
 
 Material Money uses NPM and Google Cloud SDK. To install dependencies:
+
 #### NPM
 
 ```
