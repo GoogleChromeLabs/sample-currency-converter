@@ -29,7 +29,7 @@ npm i
 
 #### Google Cloud SDK
 
-Follow the instructions at (Google Cloud)[https://cloud.google.com/sdk/downloads#interactive].
+Follow the instructions at [Google Cloud](https://cloud.google.com/sdk/downloads#interactive).
 
 ### Building and developing
 
