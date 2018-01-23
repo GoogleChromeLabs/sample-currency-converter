@@ -19,11 +19,17 @@ Try it out live at [material.money](https://material.money)!
 
 ### Installing dependencies
 
-Material Money uses NPM to install dependencies:
+Material Money uses NPM and Google Cloud SDK. To install dependencies:
+
+#### NPM
 
 ```
 npm i
 ```
+
+#### Google Cloud SDK
+
+Follow the instructions at (Google Cloud)[https://cloud.google.com/sdk/downloads#interactive].
 
 ### Building and developing
 

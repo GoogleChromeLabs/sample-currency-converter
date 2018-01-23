@@ -4,3 +4,4 @@ node_modules
 .temp
 cert.pem
 key.pem
+package-lock.json
