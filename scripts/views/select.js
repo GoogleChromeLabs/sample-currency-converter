@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {wait} from '../promise-utils';
+import {
+  wait,
+} from '../promise-utils';
 
 /**
  * Main class for the currency selection view.
@@ -93,7 +95,7 @@ export class SelectView {
       let symbol = document.createElement('span');
       symbol.classList.add('mm-select__item-symbol');
       symbol.classList.add('mm-animation--circle');
-      symbol.classList.add('mdc-list-item__start-detail');
+      symbol.classList.add('mdc-list-item__graphic');
       symbol.textContent = details.symbol;
       li.appendChild(symbol);
       let name = document.createElement('name');

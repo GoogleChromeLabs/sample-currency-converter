@@ -20,6 +20,8 @@
   width: 100%;
   z-index: 1;
   cursor: pointer;
+  color: white;
+  overflow: hidden;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -51,6 +53,7 @@
   text-align: center;
   font-size: 1.5rem;
   z-index: 3;
+  color: white;
 }
 
 .mm-select__item-name {

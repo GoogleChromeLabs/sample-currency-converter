@@ -54,8 +54,8 @@
             <a class="material-icons mm-toolbar__more" aria-label="Menu" alt="Menu">
               <img alt="More" src="images/ic_more_vert.svg">
             </a>
-            <div class="mdc-simple-menu mdc-toolbar__menu mm-menu" tabindex="-1">
-              <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+            <div class="mdc-menu mdc-toolbar__menu mm-menu" tabindex="-1">
+              <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
                 <li class="mdc-list-item mm-menu__settings" role="menuitem" tabindex="0">
                   Settings
                 </li>
@@ -171,14 +171,14 @@
   </div>
 
   <div class="mm-select mm-screen mm-screen--disabled">
-    <ul class="mm-select__list mdc-list mdc-list--avatar-list mdc-list--theme-dark mdc-theme--primary-bg">
+    <ul class="mm-select__list mdc-list mdc-list--non-interactive mdc-list--avatar-list mdc-list--theme-dark mdc-theme--primary-bg">
     </ul>
   </div>
 
   <div class="mm-settings mm-screen mm-screen--disabled">
     <div class="mdc-list-group">
       <h3 class="mdc-list-group__subheader mm-settings__group">Location</h3>
-      <div class="mm-settings__entry">
+      <div class="mdc-list-item mm-settings__entry">
         <div class="mm-settings__entry-text">
           <label for="mm-settings-geo" class="mdc-switch-label mm-settings__entry-label">Suggest travel currencies</label>
           <div class="mm-settings__entry-details">
@@ -192,12 +192,12 @@
           </div>
         </div>
       </div>
-      <hr class="mdc-list-divider">
+      <hr class="mm-settings__divider mdc-list-divider">
     </div>
 
     <div class="mdc-list-group">
       <h3 class="mdc-list-group__subheader mm-settings__group">Notifications</h3>
-      <div class="mm-settings__entry">
+      <div class="mdc-list-item mm-settings__entry">
         <div class="mm-settings__entry-text">
           <label for="mm-settings-notify" class="mdc-switch-label mm-settings__entry-label">
             Notify when rates are updated
@@ -210,45 +210,36 @@
           </div>
         </div>
       </div>
-      <hr class="mdc-list-divider">
+      <hr class="mm-settings__divider mdc-list-divider">
     </div>
 
     <div class="mdc-list-group">
       <h3 class="mdc-list-group__subheader mm-settings__group">Common values (denominations)</h3>
-      <div class="mm-settings__entry">
+      <div class="mdc-list-item mm-settings__entry">
         <span class="mm-settings__common-symbol" data-mm-bind="home.symbol"></span>
         <div class="mm-settings__common-value-container">
-          <div class="mdc-textfield mm-js-common-value mm-settings__common-value">
-            <input required type="number" min="0" step="any" class="mdc-textfield__input" id="mm-settings-first" value="1">
-            <label for="mm-settings-first" class="mdc-textfield__label">First</label>
+          <div class="mdc-text-field mm-js-common-value mm-settings__common-value">
+            <input required type="number" min="0" step="any" class="mdc-text-field__input" id="mm-settings-first" value="1">
+            <label for="mm-settings-first" class="mdc-floating-label">First</label>
           </div>
-          <p class="mdc-textfield-helptext mdc-textfield-helptext--validation-msg" role="alert">
-            You need to enter a number
-          </p>
         </div>
       </div>
-      <div class="mm-settings__entry">
+      <div class="mdc-list-item mm-settings__entry">
         <span class="mm-settings__common-symbol" data-mm-bind="home.symbol"></span>
         <div class="mm-settings__common-value-container">
-          <div class="mdc-textfield mm-js-common-value mm-settings__common-value">
-            <input required type="number" min="0" step="any" class="mdc-textfield__input" id="mm-settings-second" value="20">
-            <label for="mm-settings-second" class="mdc-textfield__label">Second</label>
+          <div class="mdc-text-field mm-js-common-value mm-settings__common-value">
+            <input required type="number" min="0" step="any" class="mdc-text-field__input" id="mm-settings-second" value="20">
+            <label for="mm-settings-second" class="mdc-floating-label">Second</label>
           </div>
-          <p class="mdc-textfield-helptext mdc-textfield-helptext--validation-msg" role="alert">
-            You need to enter a number
-          </p>
         </div>
       </div>
-      <div class="mm-settings__entry">
+      <div class="mdc-list-item mm-settings__entry">
         <span class="mm-settings__common-symbol" data-mm-bind="home.symbol"></span>
         <div class="mm-settings__common-value-container">
-          <div class="mdc-textfield mm-js-common-value mm-settings__common-value">
-            <input required type="number" min="0" step="any" class="mdc-textfield__input" id="mm-settings-third" value="50">
-            <label for="mm-settings-third" class="mdc-textfield__label">Third</label>
+          <div class="mdc-text-field mm-js-common-value mm-settings__common-value">
+            <input required type="number" min="0" step="any" class="mdc-text-field__input" id="mm-settings-third" value="50">
+            <label for="mm-settings-third" class="mdc-floating-label">Third</label>
           </div>
-          <p class="mdc-textfield-helptext mdc-textfield-helptext--validation-msg" role="alert">
-            You need to enter a number
-          </p>
         </div>
       </div>
     </div>

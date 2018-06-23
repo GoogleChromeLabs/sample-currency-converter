@@ -29,7 +29,7 @@ export default class ModelEntry {
     this._value = value;
     this._listeners = listeners;
     this._bound =
-        this._name ? document.querySelectorAll(`[data-mm-bind='${name}']`) : [];
+      this._name ? document.querySelectorAll(`[data-mm-bind='${name}']`) : [];
   }
 
   /**
