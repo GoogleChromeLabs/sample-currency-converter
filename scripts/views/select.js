@@ -66,13 +66,8 @@ export class SelectView {
     let list = document.querySelector('.mm-select__list');
     let entries = list.querySelectorAll('.mm-select__item');
 
-    for (let i = 0; i < entries.length; i++) {
-      if (entries[i].dataset.currency === code) {
-        entries[i].classList.add('mm-select--selected');
-      } else {
-        entries[i].classList.remove('mm-select--selected');
-      }
-    }
+    entries.forEach((entry) => entry.classList.toggle('mm-select--selected',
+      entry.dataset.currency === code));
   }
 
   /**
@@ -89,13 +84,11 @@ export class SelectView {
     // Populate with new set of currencies.
     for (let [code, details] of this._model.currencies.value) {
       let li = document.createElement('li');
-      li.classList.add('mm-select__item');
-      li.classList.add('mdc-list-item');
+      li.classList.add('mm-select__item', 'mdc-list-item');
       li.dataset.currency = code;
       let symbol = document.createElement('span');
-      symbol.classList.add('mm-select__item-symbol');
-      symbol.classList.add('mm-animation--circle');
-      symbol.classList.add('mdc-list-item__graphic');
+      symbol.classList.add('mm-select__item-symbol', 'mm-animation--circle',
+        'mdc-list-item__graphic');
       symbol.textContent = details.symbol;
       li.appendChild(symbol);
       let name = document.createElement('name');

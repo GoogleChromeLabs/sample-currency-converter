@@ -40,3 +40,11 @@
   cursor: auto;
   content: "";
 }
+
+/* Override some snackbar styles to hide it when rubberband-scrolling */
+.mdc-snackbar {
+  visibility: hidden;
+}
+.mdc-snackbar--active {
+  visibility: visible;
+}

@@ -51,9 +51,9 @@ export default class ModelEntry {
       listener(this._value);
     }
 
-    for (let i = 0; i < this._bound.length; i++) {
-      this._bound[i].textContent = this._value;
-    }
+    this._bound.forEach((item) => {
+      item.textContent = this._value;
+    });
   }
 
   /**

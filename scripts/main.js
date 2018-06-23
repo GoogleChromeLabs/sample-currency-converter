@@ -196,12 +196,12 @@ class App {
 
     // Update currency details when currency code changes.
     home.code.listen((code) => {
-      home.name.value = this._model.currencies.value.get(code)['name'];
-      home.symbol.value = this._model.currencies.value.get(code)['symbol'];
+      home.name.value = this._model.currencies.value.get(code).name;
+      home.symbol.value = this._model.currencies.value.get(code).symbol;
     });
     travel.code.listen((code) => {
-      travel.name.value = this._model.currencies.value.get(code)['name'];
-      travel.symbol.value = this._model.currencies.value.get(code)['symbol'];
+      travel.name.value = this._model.currencies.value.get(code).name;
+      travel.symbol.value = this._model.currencies.value.get(code).symbol;
     });
 
     const convertComputed = () => {
@@ -905,5 +905,5 @@ class App {
   }
 }
 
-let app = new App();
-window.app = app;
+// eslint-disable-next-line no-new
+new App();

@@ -41,8 +41,9 @@ export class SettingsView {
     geoControl.checked = this._model.geo.enabled.value;
     notifyControl.checked = this._model.settings.notify.value;
     this._model.geo.enabled.listen((value) => (geoControl.checked = value));
-    this._model.settings.notify.listen((value) =>
-      (notifyControl.checked = value));
+    this._model.settings.notify.listen((value) => {
+      notifyControl.checked = value;
+    });
 
     // Add event listeners.
     geoControl.addEventListener('change', () => {
@@ -59,8 +60,7 @@ export class SettingsView {
 
     const labels = ['first', 'second', 'third'];
 
-    for (let i = 0; i < commonValueControls.length; i++) {
-      const control = commonValueControls[i];
+    commonValueControls.forEach((control, i) => {
       const input = control.querySelector('input');
       this._commonValues.push(new MDCTextField(control));
 
@@ -74,7 +74,7 @@ export class SettingsView {
       // Set initial values and listen to model changes.
       input.value = this._model.common[labels[i]].home.value;
       this._model.common[labels[i]].home.listen((val) => (input.value = val));
-    }
+    });
   }
 
   /**

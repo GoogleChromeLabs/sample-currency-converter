@@ -31,10 +31,7 @@ export class GeoError {
   constructor(type, inner = null, message = null) {
     this.type = type;
     this.inner = inner;
-    this.message = this.inner ? this.inner.message : this.message;
-    if (message) {
-      this.message = message;
-    }
+    this.message = message || (this.inner ? this.inner.message : this.message);
   }
 }
 
