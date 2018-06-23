@@ -188,7 +188,21 @@ gulp.task('webpack', (callback) => {
     }],
     (err, stats) => {
       if (err) {
-        throw new gutil.PluginError('webpack', err);
+        console.error(err.stack || err);
+        if (err.details) {
+          console.error(err.details);
+        }
+        return;
+      }
+
+      const info = stats.toJson();
+
+      if (stats.hasErrors()) {
+        info.errors.map((error) => console.error(error));
+      }
+
+      if (stats.hasWarnings()) {
+        info.warnings.map((error) => console.warn(error));
       }
       callback();
     }
