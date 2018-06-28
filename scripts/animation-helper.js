@@ -35,9 +35,9 @@ export default class AnimationHelper {
   constructor(animationScreen) {
     this._animationScreen = animationScreen;
     this._clip =
-        this._animationScreen.querySelector(`.${AnimationHelper.CSS.CLIP}`);
+      this._animationScreen.querySelector(`.${AnimationHelper.CSS.CLIP}`);
     this._item =
-        this._animationScreen.querySelector(`.${AnimationHelper.CSS.ITEM}`);
+      this._animationScreen.querySelector(`.${AnimationHelper.CSS.ITEM}`);
   }
 
   /**
@@ -66,7 +66,8 @@ export default class AnimationHelper {
    */
   removeStyles() {
     ['top', 'left', 'height', 'width', 'border-radius', 'transform',
-     'background'].forEach(
+      'background',
+    ].forEach(
       (property) => {
         this._animationScreen.style.removeProperty(property);
         this._clip.style.removeProperty(property);
@@ -96,7 +97,7 @@ export default class AnimationHelper {
 
       // Hide animation screen again.
       this._animationScreen.classList.remove(
-          AnimationHelper.CSS.ANIMATION.VISIBLE);
+        AnimationHelper.CSS.ANIMATION.VISIBLE);
       this.removeStyles();
       startScreen.removeEventListener('transitionend', cleanupHandler);
     };
@@ -123,9 +124,15 @@ export default class AnimationHelper {
    * @param {boolean} hideTarget Whether to hide the end element until the end
    *                             of the animation.
    */
-  scalingAnimation(
-      {startEl, targetEl, startScreen, targetScreen,
-       transparentBg = false, fadeStartScreen = false, hideTarget = false}) {
+  scalingAnimation({
+    startEl,
+    targetEl,
+    startScreen,
+    targetScreen,
+    transparentBg = false,
+    fadeStartScreen = false,
+    hideTarget = false,
+  }) {
     let startRect = startEl.getBoundingClientRect();
     const startStyle = getComputedStyle(startEl);
     let endRect = null;
@@ -158,7 +165,7 @@ export default class AnimationHelper {
     } else {
       // Transition to viewport box if no target element is provided.
       let ruler =
-          this._animationScreen.querySelector(`.${AnimationHelper.CSS.RULER}`);
+        this._animationScreen.querySelector(`.${AnimationHelper.CSS.RULER}`);
       endRect = ruler.getBoundingClientRect();
       endStyle = getComputedStyle(ruler);
     }
@@ -171,30 +178,30 @@ export default class AnimationHelper {
     // Copy start element background to the animating element.
     if (startStyle.getPropertyValue('background')) {
       this._item.style.setProperty('background',
-          startStyle.getPropertyValue('background'));
+        startStyle.getPropertyValue('background'));
     } else {
       this._item.style.setProperty('background-color',
-          startStyle.getPropertyValue('background-color'));
+        startStyle.getPropertyValue('background-color'));
     }
 
     // Firefox doesn't generate shorthand properties in computed styles, so we
     // need to generate these ourselves.
     let startRadius =
-        startStyle.getPropertyValue('border-top-left-radius') + ' ' +
-        startStyle.getPropertyValue('border-top-right-radius') + ' ' +
-        startStyle.getPropertyValue('border-bottom-right-radius') + ' ' +
-        startStyle.getPropertyValue('border-bottom-left-radius');
+      startStyle.getPropertyValue('border-top-left-radius') + ' ' +
+      startStyle.getPropertyValue('border-top-right-radius') + ' ' +
+      startStyle.getPropertyValue('border-bottom-right-radius') + ' ' +
+      startStyle.getPropertyValue('border-bottom-left-radius');
 
     // Are we animating from a circle to a rectangle?
     let circleToRect = startEl.classList.contains(AnimationHelper.CSS.CIRCLE) &&
-        (!targetEl || !targetEl.classList.contains(AnimationHelper.CSS.CIRCLE));
+      (!targetEl || !targetEl.classList.contains(AnimationHelper.CSS.CIRCLE));
     if (circleToRect) {
       // Animate a circle growing into a rectangle.
       // Position the clipping element so that the animating element, at its
       // center, starts in the right place.
       clipTop = startRect.top - endRect.height / 2 + startRect.height / 2;
       clipLeft = startRect.left - offset - endRect.width / 2 +
-          startRect.width / 2;
+        startRect.width / 2;
       this._clip.style.setProperty('top', _pixels(clipTop));
       this._clip.style.setProperty('left', _pixels(clipLeft));
 
@@ -207,13 +214,13 @@ export default class AnimationHelper {
       this._clip.style.setProperty('height', _pixels(endRect.height));
       this._clip.style.setProperty('width', _pixels(endRect.width));
       this._clip.style.setProperty('border-radius',
-          endStyle.getPropertyValue('border-radius'));
+        endStyle.getPropertyValue('border-radius'));
 
       // Position the animating element at the center of the clipping element.
       this._item.style.setProperty('top',
-          _pixels(endRect.height / 2 - startRect.height / 2));
+        _pixels(endRect.height / 2 - startRect.height / 2));
       this._item.style.setProperty('left',
-          _pixels(endRect.width / 2 - startRect.width / 2));
+        _pixels(endRect.width / 2 - startRect.width / 2));
     } else {
       // Animate other cases.
       // Make the clipping element span the whole screen.
@@ -243,7 +250,7 @@ export default class AnimationHelper {
           let x = endRect.left - clipLeft;
           let y = endRect.top - clipTop;
           this._clip.style.setProperty('transform',
-              `translate(${x}px, ${y}px)`);
+            `translate(${x}px, ${y}px)`);
 
           // Scale the animating element to its final size.
           this._item.style.setProperty('transform', `scale(${scaleX})`);
@@ -251,11 +258,11 @@ export default class AnimationHelper {
           // Move and scale the animating element. The clipping element stays
           // in place.
           let x = (endRect.left + endRect.width / 2) -
-              (startRect.left + startRect.width / 2);
+            (startRect.left + startRect.width / 2);
           let y = (endRect.top + endRect.height / 2) -
-              (startRect.top + startRect.height / 2);
+            (startRect.top + startRect.height / 2);
           this._item.style.setProperty('transform',
-              `translate(${x}px, ${y}px) scale(${scaleX}, ${scaleY})`);
+            `translate(${x}px, ${y}px) scale(${scaleX}, ${scaleY})`);
         }
       } else if (stage === 3) {
         if (hideTarget && targetEl) {
@@ -271,30 +278,30 @@ export default class AnimationHelper {
 
         // Fade the animation layer out.
         this._animationScreen.classList.remove(
-            AnimationHelper.CSS.ANIMATION.VISIBLE);
+          AnimationHelper.CSS.ANIMATION.VISIBLE);
       } else if (stage >= 4 && target.propertyName === 'opacity') {
         // Stage 4: cleanup.
         this.removeStyles();
 
         // Remove animation layer.
         this._animationScreen.classList.remove(
-            AnimationHelper.CSS.ANIMATION.ANIMATING);
+          AnimationHelper.CSS.ANIMATION.ANIMATING);
         this._animationScreen.removeEventListener('transitionend',
-            animationHandler);
+          animationHandler);
       }
       stage++;
     };
 
     // Stage 1: trigger fade-in of animation layer.
     this._animationScreen.classList.add(
-        AnimationHelper.CSS.ANIMATION.ANIMATING);
+      AnimationHelper.CSS.ANIMATION.ANIMATING);
     this._animationScreen.classList.add(AnimationHelper.CSS.ANIMATION.VISIBLE);
     this._animationScreen.addEventListener('transitionend', animationHandler);
 
     // Wait until the transition property change is applied.
     requestAnimationFrame(() => {
       this._animationScreen.classList.add(
-          AnimationHelper.CSS.ANIMATION.VISIBLE);
+        AnimationHelper.CSS.ANIMATION.VISIBLE);
       // Wait until the opacity property change is applied.
       requestAnimationFrame(() => {
         document.body.scrollTop = scrollTop;

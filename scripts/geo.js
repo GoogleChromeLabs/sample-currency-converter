@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import {fetchJson} from './promise-utils';
+import {
+  fetchJson,
+} from './promise-utils';
 
 /**
  * Represents an error thrown by this module.
@@ -29,10 +31,7 @@ export class GeoError {
   constructor(type, inner = null, message = null) {
     this.type = type;
     this.inner = inner;
-    this.message = this.inner ? this.inner.message : this.message;
-    if (message) {
-      this.message = message;
-    }
+    this.message = message || (this.inner ? this.inner.message : this.message);
   }
 }
 
@@ -42,7 +41,7 @@ export class GeoError {
  * @return {Promise.<Position>} The constructed promise.
  */
 export function getCurrentPosition() {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     let success = (position) => resolve(position);
     let failure = (error) => reject(new GeoError('PositionError', error));
 
@@ -69,7 +68,7 @@ export function reverseGeocode(position) {
   const GEO_REQ = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
 
   if (position && position.coords && 'latitude' in position.coords &&
-      'longitude' in position.coords) {
+    'longitude' in position.coords) {
     let geoPromise = fetchJson(
       `${GEO_REQ}${position.coords.latitude},${position.coords.longitude}`,
       'Error while reversing geocode.'
@@ -81,7 +80,7 @@ export function reverseGeocode(position) {
           return result;
         } else if (result && result.status) {
           throw new GeoError('Reverse', null,
-              `Reversing geocode failed with status "${result.status}."`);
+            `Reversing geocode failed with status "${result.status}."`);
         } else {
           throw new GeoError('Reverse', null, 'Reversing geocode failed.');
         }

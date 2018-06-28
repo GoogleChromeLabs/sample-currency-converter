@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import {fetchFile} from './promise-utils';
+import {
+  fetchFile,
+} from './promise-utils';
 
 // Prefer requestIdleCallback, if available.
 const injector = window.requestIdleCallback || window.requestAnimationFrame;

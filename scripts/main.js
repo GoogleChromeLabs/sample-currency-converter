@@ -24,19 +24,23 @@ import * as PromiseUtils from './promise-utils';
 import * as Geo from './geo.js';
 import * as Db from './db.js';
 
-import {MDCSimpleMenu} from '@material/menu';
-import {MDCRipple} from '@material/ripple';
-import {MDCDialog} from '@material/dialog';
-import {MDCSnackbar} from '@material/snackbar';
+import {
+  MDCMenu,
+} from '@material/menu';
+import {
+  MDCRipple,
+} from '@material/ripple';
+import {
+  MDCDialog,
+} from '@material/dialog';
+import {
+  MDCSnackbar,
+} from '@material/snackbar';
 
 import WebFont from 'webfontloader';
 
 const FONT_TIMEOUT = 300;
 
-const VIEW_JS = {
-  SELECT: 'scripts/views/select.js',
-  SETTINGS: 'scripts/views/settings.js',
-};
 const EXTRA_STYLES = 'styles/styles.min.css';
 
 /**
@@ -115,7 +119,7 @@ class App {
           travel: new ModelEntry('common.third.travel'),
         },
       },
-      currencies: new ModelEntry(/* Not bindable */),
+      currencies: new ModelEntry( /* Not bindable */ ),
       rates: {
         date: new ModelEntry('rates.date'),
         relative: new ModelEntry('rates.relative'),
@@ -147,30 +151,34 @@ class App {
 
     // Load currency list.
     this._fetchCurrencies()
-        // Initialize model.
-        .then(() => this._initModel())
-        // Choose default currencies.
-        .then(() => this._loadCurrency('home').catch(() => {
-          // Loading failed, choose a default
-          this._model.home.code.value = 'USD';
-        }))
-        .then(() => this._loadCurrency('travel').catch(() => {
-          // Loading failed, choose a default.
-          this._model.travel.code.value =
-              this._model.home.code.value === 'USD' ? 'EUR' : 'USD';
-        }))
-        // Initialize application logic and UI elements.
-        .then(() => {
-          this._init();
-          this._initElements();
-        });
+      // Initialize model.
+      .then(() => this._initModel())
+      // Choose default currencies.
+      .then(() => this._loadCurrency('home').catch(() => {
+        // Loading failed, choose a default
+        this._model.home.code.value = 'USD';
+      }))
+      .then(() => this._loadCurrency('travel').catch(() => {
+        // Loading failed, choose a default.
+        this._model.travel.code.value =
+          this._model.home.code.value === 'USD' ? 'EUR' : 'USD';
+      }))
+      // Initialize application logic and UI elements.
+      .then(() => {
+        this._init();
+        this._initElements();
+      });
   }
 
   /**
    * Initialize model. Sets up listeners for ensuring internal consistency.
    */
   _initModel() {
-    const {home, travel, common} = this._model;
+    const {
+      home,
+      travel,
+      common,
+    } = this._model;
 
     const convertInModel = (from, to) => {
       const amount = from.amount.value;
@@ -188,12 +196,12 @@ class App {
 
     // Update currency details when currency code changes.
     home.code.listen((code) => {
-      home.name.value = this._model.currencies.value.get(code)['name'];
-      home.symbol.value = this._model.currencies.value.get(code)['symbol'];
+      home.name.value = this._model.currencies.value.get(code).name;
+      home.symbol.value = this._model.currencies.value.get(code).symbol;
     });
     travel.code.listen((code) => {
-      travel.name.value = this._model.currencies.value.get(code)['name'];
-      travel.symbol.value = this._model.currencies.value.get(code)['symbol'];
+      travel.name.value = this._model.currencies.value.get(code).name;
+      travel.symbol.value = this._model.currencies.value.get(code).symbol;
     });
 
     const convertComputed = () => {
@@ -245,22 +253,22 @@ class App {
 
     // Load last travel currency.
     Db.loadFromStore('last-travel')
-        .then((value) => (this._lastTravel = value))
-        .catch(() => (this._lastTravel = null));
+      .then((value) => (this._lastTravel = value))
+      .catch(() => (this._lastTravel = null));
 
     // Prepare settings model listeners.
     this._model.geo.enabled.listen((value) =>
-        Db.saveToStore('geo.enabled', value));
+      Db.saveToStore('geo.enabled', value));
     this._model.settings.notify.listen((value) =>
-        Db.saveToStore('settings.notify', value));
+      Db.saveToStore('settings.notify', value));
 
     // Load settings.
     const notifySettingsPromise = Db.loadFromStore('settings.notify')
-        .then((enabled) => (this._model.settings.notify.value = enabled))
-        .catch(() => (this._model.settings.notify.value = false));
+      .then((enabled) => (this._model.settings.notify.value = enabled))
+      .catch(() => (this._model.settings.notify.value = false));
     const geoSettingsPromise = Db.loadFromStore('geo.enabled')
-        .then((enabled) => (this._model.geo.enabled.value = enabled))
-        .catch(() => (this._model.geo.enabled.value = false));
+      .then((enabled) => (this._model.geo.enabled.value = enabled))
+      .catch(() => (this._model.geo.enabled.value = false));
 
     notifySettingsPromise.then(() => {
       this._model.settings.notify.listen((value) => {
@@ -286,7 +294,7 @@ class App {
       if (this._model.geo.enabled.value) {
         this._locate().catch((error) => {
           if ('type' in error && error.type === 'PositionError' &&
-              error.inner.code === 1) {
+            error.inner.code === 1) {
             this._model.geo.enabled.value = false;
             this._snackbar.show({
               message: 'Cannot retrieve location because location access has ' +
@@ -303,7 +311,7 @@ class App {
         if (value) {
           this._locate().catch((error) => {
             if ('type' in error && error.type === 'PositionError' &&
-                error.inner.code === 1) {
+              error.inner.code === 1) {
               this._model.geo.enabled.value = false;
               this._snackbar.show({
                 message: 'Cannot enable travel currency suggestion because ' +
@@ -320,11 +328,11 @@ class App {
 
     // Load rates from local storage, if available.
     const loadRates = this._loadRates()
-        .then((rates) => rates, () => this._fetchRates());
+      .then((rates) => rates, () => this._fetchRates());
 
     // Try to fetch latest rates, regardless. Schedule a fetch if that fails.
     PromiseUtils.after(loadRates, () =>
-        this._fetchRates().catch(() => this._scheduleRateFetch()));
+      this._fetchRates().catch(() => this._scheduleRateFetch()));
 
     const loadExtraCSS = loadAndInjectStyles(EXTRA_STYLES);
     loadExtraCSS.then(() => console.log('Styles loaded!'));
@@ -353,7 +361,7 @@ class App {
       loadFonts,
       PromiseUtils.wait(FONT_TIMEOUT),
     ]).then(() => requestAnimationFrame(() =>
-        this._screens.convert.classList.remove('mm-screen--hidden')));
+      this._screens.convert.classList.remove('mm-screen--hidden')));
 
     // Load common values, and provide defaults if things fail.
     const loadCommonValues = Promise.all([
@@ -382,7 +390,7 @@ class App {
       // Enable common values.
       this._screens.convert.classList.add('mm-convert--has-common');
       PromiseUtils.wait(200).then(() =>
-          this._screens.convert.classList.add('mm-convert--has-common-end'));
+        this._screens.convert.classList.add('mm-convert--has-common-end'));
     });
 
     this._booted = Promise.all([
@@ -396,26 +404,30 @@ class App {
       // Set up history handling for back button support.
       if ('history' in window) {
         // Add some state to current history location.
-        history.replaceState({page: 'convert'}, 'Currency conversion');
+        history.replaceState({
+          page: 'convert',
+        }, 'Currency conversion');
 
         // Set up event listener for page navigation.
         window.addEventListener('popstate',
-            (event) => this._handlePopState(event));
+          (event) => this._handlePopState(event));
       }
     });
 
     // Lazily load view JS.
-    this._selectViewPromise = import('./views/select.js')
-        .then((module) => this._viewClasses.SelectView = module.SelectView)
-        .then(() => this._booted)
-        .then(() => new this._viewClasses.SelectView(this, this._model,
-            this._screens.select, this._animationHelper));
+    this._selectViewPromise =
+      import('./views/select.js')
+      .then((module) => (this._viewClasses.SelectView = module.SelectView))
+      .then(() => this._booted)
+      .then(() => new this._viewClasses.SelectView(this, this._model,
+        this._screens.select, this._animationHelper));
 
-    this._settingsViewPromise = import('./views/settings.js')
-        .then((module) => this._viewClasses.SettingsView = module.SettingsView)
-        .then(() => this._booted)
-        .then(() => new this._viewClasses.SettingsView(this, this._model,
-            this._screens.settings, this._animationHelper));
+    this._settingsViewPromise =
+      import('./views/settings.js')
+      .then((module) => (this._viewClasses.SettingsView = module.SettingsView))
+      .then(() => this._booted)
+      .then(() => new this._viewClasses.SettingsView(this, this._model,
+        this._screens.settings, this._animationHelper));
 
     this._booted.then(() => this._hideLoadingScreen());
 
@@ -423,35 +435,37 @@ class App {
 
     MDCRipple.attachTo(document.querySelector('.mm-convert__update'));
     const menu =
-        new MDCSimpleMenu(document.querySelector('.mdc-toolbar__menu'));
+      new MDCMenu(document.querySelector('.mdc-toolbar__menu'));
 
     this._snackbar = new MDCSnackbar(document.querySelector('.mm-snackbar'));
 
     // Add event listener to button to toggle the menu on and off.
     this._elements.more.addEventListener('click', () =>
-        this._booted.then(() => (menu.open = !menu.open)));
+      this._booted.then(() => (menu.open = !menu.open)));
 
     // Add event listener to open Settings screen.
     document.querySelector('.mm-menu__settings').addEventListener('click',
-        () => this._settingsViewPromise.then((view) => {
-          view.show(this._screens.convert);
-          history.pushState({page: 'settings'}, 'Settings');
-        }));
+      () => this._settingsViewPromise.then((view) => {
+        view.show(this._screens.convert);
+        history.pushState({
+          page: 'settings',
+        }, 'Settings');
+      }));
 
     const ratesDialog =
-        new MDCDialog(document.querySelector('#mm-rates-dialog'));
+      new MDCDialog(document.querySelector('#mm-rates-dialog'));
     document.querySelector('.mm-menu__rates').addEventListener('click', () => {
       this._updateRateInfo();
       ratesDialog.show();
     });
     document.querySelector('.mm-convert__last-updated').addEventListener(
-        'click', () => {
-          this._updateRateInfo();
-          ratesDialog.show();
-        });
+      'click', () => {
+        this._updateRateInfo();
+        ratesDialog.show();
+      });
 
     const aboutDialog =
-        new MDCDialog(document.querySelector('#mm-about-dialog'));
+      new MDCDialog(document.querySelector('#mm-about-dialog'));
     document.querySelector('.mm-menu__about').addEventListener('click', () => {
       this._updateRateInfo();
       aboutDialog.show();
@@ -471,35 +485,41 @@ class App {
     });
 
     const travelButton =
-        document.querySelector('#convert-travel .mm-convert__currency');
+      document.querySelector('#convert-travel .mm-convert__currency');
     const homeButton =
-        document.querySelector('#convert-home .mm-convert__currency');
+      document.querySelector('#convert-home .mm-convert__currency');
     const updateButton =
-        document.querySelector('.mm-convert__update');
+      document.querySelector('.mm-convert__update');
 
     updateButton.addEventListener('click', () => this._booted.then(
-        () => this._fetchRates(true).catch(() => this._scheduleRateFetch())));
+      () => this._fetchRates(true).catch(() => this._scheduleRateFetch())));
 
     // Set up animations for conversion screen buttons.
     travelButton.addEventListener('click', () => this._selectViewPromise
-        .then((view) => {
-          view.show(this._screens.convert, travelButton, this._model.travel);
-          history.pushState({page: 'select', currency: 'travel'},
-              'Select travel currency');
-        })
+      .then((view) => {
+        view.show(this._screens.convert, travelButton, this._model.travel);
+        history.pushState({
+            page: 'select',
+            currency: 'travel',
+          },
+          'Select travel currency');
+      })
     );
     homeButton.addEventListener('click', () => this._selectViewPromise
-        .then((view) => {
-          view.show(this._screens.convert, homeButton, this._model.home);
-          history.pushState({page: 'select', currency: 'home'},
-              'Select home currency');
-        })
+      .then((view) => {
+        view.show(this._screens.convert, homeButton, this._model.home);
+        history.pushState({
+            page: 'select',
+            currency: 'home',
+          },
+          'Select home currency');
+      })
     );
 
     this._travelBlock = document.querySelector('#convert-travel');
     this._homeBlock = document.querySelector('#convert-home');
     this._travelBox =
-        document.querySelector('#convert-travel .mm-convert__value');
+      document.querySelector('#convert-travel .mm-convert__value');
     this._homeBox = document.querySelector('#convert-home .mm-convert__value');
 
     // Set up event listeners for modifying the model.
@@ -546,11 +566,11 @@ class App {
 
     // Set up storage for common values.
     this._model.common.first.home.listen((value) =>
-        Db.saveToStore('common.first', value));
+      Db.saveToStore('common.first', value));
     this._model.common.second.home.listen((value) =>
-        Db.saveToStore('common.second', value));
+      Db.saveToStore('common.second', value));
     this._model.common.third.home.listen((value) =>
-        Db.saveToStore('common.third', value));
+      Db.saveToStore('common.third', value));
   }
 
   /**
@@ -585,7 +605,7 @@ class App {
       if (event.state.page === 'convert') {
         // Get currently active screen.
         const current =
-            document.querySelector('.mm-screen:not(.mm-screen--disabled)');
+          document.querySelector('.mm-screen:not(.mm-screen--disabled)');
         this._animationHelper.fadingAnimation(current, this._screens.convert);
         this.setAppTitle();
       }
@@ -612,7 +632,7 @@ class App {
       conversion = value * this._rates.rates[toCur];
     } else {
       conversion =
-          value * this._rates.rates[toCur] / this._rates.rates[fromCur];
+        value * this._rates.rates[toCur] / this._rates.rates[fromCur];
     }
 
     return Math.round(conversion * 100) / 100;
@@ -636,7 +656,7 @@ class App {
         this._model.rates.relative.value = 'today';
       } else {
         this._model.rates.relative.value =
-            `${days} day${days === 1 ? '' : 's'} ago`;
+          `${days} day${days === 1 ? '' : 's'} ago`;
       }
     }
   }
@@ -719,12 +739,12 @@ class App {
     let url = forceUpdate ? `${RATE_URL}?${new Date().getTime()}` : RATE_URL;
 
     return PromiseUtils.fetchJson(url, MESSAGE, ACCEPTABLE_TIMEOUT).then(
-        (result) => {
-          this._rates = result;
-          this._updateRateInfo();
-          this._storeRates();
-          return result;
-        }
+      (result) => {
+        this._rates = result;
+        this._updateRateInfo();
+        this._storeRates();
+        return result;
+      }
     );
   }
 
@@ -749,7 +769,7 @@ class App {
     const MESSAGE = 'Error loading country to currency data.';
 
     return PromiseUtils.fetchJson(COUNTRY_CURRENCIES, MESSAGE).then(
-        (result) => (this._countryCurrencies = result));
+      (result) => (this._countryCurrencies = result));
   }
 
   /**
@@ -762,7 +782,7 @@ class App {
     const MESSAGE = 'Error loading currency data.';
 
     return PromiseUtils.fetchJson(CURRENCIES, MESSAGE).then(
-        (result) => (this._model.currencies.value = new Map(result)));
+      (result) => (this._model.currencies.value = new Map(result)));
   }
 
   /**
@@ -772,10 +792,10 @@ class App {
    */
   _identifyCountryAndCurrency(geoData) {
     if (geoData && geoData.status === 'OK' && geoData.results &&
-        geoData.results[0]) {
+      geoData.results[0]) {
       const bestGuess = geoData.results[0];
       const country = bestGuess.address_components.find((item) =>
-          item.types.includes('country'));
+        item.types.includes('country'));
 
       if (country) {
         return {
@@ -818,7 +838,7 @@ class App {
     }
 
     const isEmpty = input.value === '' && input.validity &&
-        input.validity.valid;
+      input.validity.valid;
 
     if (!isEmpty && isNaN(parseFloat(input.value))) {
       this._elements.card.classList.add('mm-convert--invalid');
@@ -826,15 +846,15 @@ class App {
       block.querySelector('.mm-convert__error').removeAttribute('aria-hidden');
       otherBlock.classList.remove('mm-convert--invalid');
       otherBlock.querySelector('.mm-convert__error').setAttribute(
-          'aria-hidden', true);
+        'aria-hidden', true);
     } else {
       this._elements.card.classList.remove('mm-convert--invalid');
       block.classList.remove('mm-convert--invalid');
       otherBlock.classList.remove('mm-convert--invalid');
       block.querySelector('.mm-convert__error').setAttribute(
-          'aria-hidden', true);
+        'aria-hidden', true);
       otherBlock.querySelector('.mm-convert__error').setAttribute(
-          'aria-hidden', true);
+        'aria-hidden', true);
     }
   }
 
@@ -844,46 +864,46 @@ class App {
    */
   _locate() {
     return Geo.getCurrentPosition()
-        .then((pos) => Geo.reverseGeocode(pos))
-        .then((data) => this._identifyCountryAndCurrency(data))
-        .then((details) => {
-          if (details) {
-            const code = details.currency;
-            const name = this._model.currencies.value.get(code)['name'];
+      .then((pos) => Geo.reverseGeocode(pos))
+      .then((data) => this._identifyCountryAndCurrency(data))
+      .then((details) => {
+        if (details) {
+          const code = details.currency;
+          const name = this._model.currencies.value.get(code)['name'];
 
-            let formattedCountryName = details.countryName;
-            // Yay, language exceptions.
-            const contriesThatNeedThe = ['United', 'Netherlands'];
-            for (let i = 0; i < contriesThatNeedThe.length; i++) {
-              if (formattedCountryName.indexOf(contriesThatNeedThe[i]) === 0) {
-                formattedCountryName = `the ${formattedCountryName}`;
-              }
-            }
-
-            if (code && code !== this._model.home.code.value &&
-                code !== this._lastTravel) {
-              this._snackbar.show({
-                message: `Welcome to ${formattedCountryName}! Would you like ` +
-                  `to change your travel currency to '${name}' (${code})?`,
-                timeout: 20000,
-                multiline: true,
-                actionOnBottom: true,
-                actionText: `Change to ${code}`,
-                actionHandler: () => {
-                  this._model.travel.code.value = code;
-                  // Fix bug with MDC-Web snackbar; force it to hide.
-                  document.querySelector('.mm-snackbar').classList.remove(
-                      'mdc-snackbar--active');
-                },
-              });
-              this._lastTravel = code;
-              Db.saveToStore('last-travel', this._lastTravel);
+          let formattedCountryName = details.countryName;
+          // Yay, language exceptions.
+          const contriesThatNeedThe = ['United', 'Netherlands'];
+          for (let i = 0; i < contriesThatNeedThe.length; i++) {
+            if (formattedCountryName.indexOf(contriesThatNeedThe[i]) === 0) {
+              formattedCountryName = `the ${formattedCountryName}`;
             }
           }
-          return details;
-        });
+
+          if (code && code !== this._model.home.code.value &&
+            code !== this._lastTravel) {
+            this._snackbar.show({
+              message: `Welcome to ${formattedCountryName}! Would you like ` +
+                `to change your travel currency to '${name}' (${code})?`,
+              timeout: 20000,
+              multiline: true,
+              actionOnBottom: true,
+              actionText: `Change to ${code}`,
+              actionHandler: () => {
+                this._model.travel.code.value = code;
+                // Fix bug with MDC-Web snackbar; force it to hide.
+                document.querySelector('.mm-snackbar').classList.remove(
+                  'mdc-snackbar--active');
+              },
+            });
+            this._lastTravel = code;
+            Db.saveToStore('last-travel', this._lastTravel);
+          }
+        }
+        return details;
+      });
   }
 }
 
-let app = new App();
-window.app = app;
+// eslint-disable-next-line no-new
+new App();

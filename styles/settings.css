@@ -29,11 +29,11 @@
 
 .mm-settings__entry {
   display: flex;
+  height: auto;
 }
 
 .mm-settings__entry-text {
   flex: 1;
-  padding-bottom: 16px;
 }
 
 .mm-settings__entry-label {
@@ -42,7 +42,7 @@
   line-height: 1.5rem;
 }
 
-.mm-settings__entry-detail {
+.mm-settings__entry-details {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -54,7 +54,7 @@
   margin-top: 0 !important;
 }
 
-.mm-settings__common-value .mdc-textfield__input {
+.mm-settings__common-value .mdc-text-field__input {
   width: 100%;
 }
 
@@ -66,12 +66,16 @@
   color: var(--mdc-theme-secondary, blue);
 }
 
+.mm-settings__divider {
+  margin-top: 16px;
+}
+
 /* Tweak switch control so that it doesn't show highlight. */
 .mm-settings .mdc-switch__native-control {
   -webkit-tap-highlight-color: transparent;
 }
 
 /* Tweak number inputs so that they don't show spinners. */
-.mm-settings .mdc-textfield__input {
+.mm-settings .mdc-text-field__input {
   -moz-appearance: textfield;
 }

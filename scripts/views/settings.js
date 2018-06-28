@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {MDCTextfield} from '@material/textfield';
+import {
+  MDCTextField,
+} from '@material/textfield';
 
 /**
  * Main class for the settings view.
@@ -39,8 +41,9 @@ export class SettingsView {
     geoControl.checked = this._model.geo.enabled.value;
     notifyControl.checked = this._model.settings.notify.value;
     this._model.geo.enabled.listen((value) => (geoControl.checked = value));
-    this._model.settings.notify.listen((value) =>
-        (notifyControl.checked = value));
+    this._model.settings.notify.listen((value) => {
+      notifyControl.checked = value;
+    });
 
     // Add event listeners.
     geoControl.addEventListener('change', () => {
@@ -53,14 +56,13 @@ export class SettingsView {
     // Handle common values.
     this._commonValues = [];
     const commonValueControls =
-        this._screen.querySelectorAll('.mm-js-common-value');
+      this._screen.querySelectorAll('.mm-js-common-value');
 
     const labels = ['first', 'second', 'third'];
 
-    for (let i = 0; i < commonValueControls.length; i++) {
-      const control = commonValueControls[i];
+    commonValueControls.forEach((control, i) => {
       const input = control.querySelector('input');
-      this._commonValues.push(new MDCTextfield(control));
+      this._commonValues.push(new MDCTextField(control));
 
       // Update model when values change.
       input.addEventListener('change', () => {
@@ -72,7 +74,7 @@ export class SettingsView {
       // Set initial values and listen to model changes.
       input.value = this._model.common[labels[i]].home.value;
       this._model.common[labels[i]].home.listen((val) => (input.value = val));
-    }
+    });
   }
 
   /**

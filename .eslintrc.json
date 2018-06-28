@@ -10,8 +10,9 @@
     "no-var": 2,
     "no-return-assign": [2, "except-parens"]
   },
+  "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   }
 }

@@ -46,7 +46,7 @@ export function after(promise, callback) {
  * @return {Promise.<Object>} The constructed promise.
  */
 export function fetchJson(url, errorString = 'Error fetching data.',
-    timeout = 0) {
+  timeout = 0) {
   return fetchFile(url, errorString, timeout, 'json');
 }
 
@@ -61,8 +61,8 @@ export function fetchJson(url, errorString = 'Error fetching data.',
  * @return {Promise.<Object>} The constructed promise.
  */
 export function fetchFile(url, errorString = 'Error fetching data.',
-    timeout = 0, responseType = '') {
-  return new Promise(function(resolve, reject) {
+  timeout = 0, responseType = '') {
+  return new Promise((resolve, reject) => {
     let req = new XMLHttpRequest();
     req.open('GET', url);
     req.timeout = timeout;

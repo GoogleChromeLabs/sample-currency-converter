@@ -75,10 +75,6 @@ html, body {
   cursor: pointer;
 }
 
-.mm-toolbar__back .material-icons {
-  height: 24px;
-}
-
 .mm-toolbar__title-block,
 .mm-toolbar__appname {
   position: absolute;

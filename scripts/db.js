@@ -20,16 +20,16 @@
  * @return {Promise.<IDBDatabase>} Promise to the IndexedDB database.
  */
 function prepareDb_() {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (self.indexedDB) {
       let req = self.indexedDB.open('db', 1);
       if (req) {
         req.onerror = (event) => reject(event);
-        req.onsuccess = function(event) {
+        req.onsuccess = (event) => {
           let db = event.target.result;
           resolve(db);
         };
-        req.onupgradeneeded = function(event) {
+        req.onupgradeneeded = (event) => {
           let db = event.target.result;
           db.createObjectStore('kv');
         };
@@ -51,7 +51,7 @@ function prepareDb_() {
  * @return {Promise.<Object>} Promise to the key-value pair value.
  */
 export function loadFromStore(key) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (self.indexedDB) {
       let dbPromise = prepareDb_();
       dbPromise.then((db) => {
@@ -80,13 +80,13 @@ export function loadFromStore(key) {
  * @return {Promise} Promise to storage success.
  */
 export function saveToStore(key, value) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (self.indexedDB) {
       let dbPromise = prepareDb_();
       dbPromise.then((db) => {
         db.onerror = (event) => reject(event);
         let put = db.transaction('kv', 'readwrite')
-            .objectStore('kv').put(value, key);
+          .objectStore('kv').put(value, key);
         put.onsuccess = () => resolve();
       });
     } else {
