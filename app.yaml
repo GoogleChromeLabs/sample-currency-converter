@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-runtime: go
+runtime: googlelegacy
 api_version: go1
 default_expiration: "365d"
 
