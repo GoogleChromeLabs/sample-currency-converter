@@ -15,17 +15,16 @@
  * limitations under the License.
  */
 
-package currencyconverter
+package main
 
 import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"log"
 	"io/ioutil"
 	"net/http"
-
-	"appengine"
-	"appengine/urlfetch"
+	"os"
 )
 
 // RateURL is the endpoint for European Central Bank rates.
@@ -51,16 +50,24 @@ type Envelope struct {
 	Rates   Rates    `xml:"Cube>Cube"`
 }
 
-func init() {
+func main() {
 	http.HandleFunc("/rates", handler)
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		log.Printf("Defaulting to port %s", port)
+	}
+
+	log.Printf("Listening to port %s", port)
+	if err := http.ListenAndServe(":" + port, nil); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	ctx := appengine.NewContext(r)
-	client := urlfetch.Client(ctx)
-
 	// Fetch rates from ECB.
-	resp, err := client.Get(RateURL)
+	resp, err := http.Get(RateURL)
 	if err != nil {
 		http.Error(w, "Error retrieving rates", 500)
 		return
