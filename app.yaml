@@ -12,13 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-runtime: googlelegacy
-api_version: go1
+runtime: go112
 default_expiration: "365d"
 
 handlers:
 - url: /rates
-  script: _go_app
+  script: auto
   secure: always
 
 - url: /sw.js
