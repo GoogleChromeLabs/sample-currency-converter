@@ -46,6 +46,7 @@ gulp serve
 ```
 
 ## Team
+[Andre Bandarra](https://github.com/andreban) - UX Engineer
 [Sérgio Gomes](https://github.com/sgomes) - UX Engineer
 
 [Mustafa Kurtuldu](https://github.com/mustafa-x) - UX Designer
