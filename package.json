@@ -31,7 +31,7 @@
     "babel-preset-minify": "0.4.3",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
-    "eslint": "^5.0.0",
+    "eslint": "^10.4.0",
     "eslint-config-google": "^0.9.1",
     "gulp": "^4.0.0",
     "gulp-babel": "^7.0.0",
@@ -46,7 +46,7 @@
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^11.0.0",
     "prettier": "^1.13.5",
-    "prettier-eslint": "^8.8.2",
+    "prettier-eslint": "^16.4.2",
     "run-sequence": "^2.2.0",
     "webfontloader": "^1.6.28",
     "webpack": "^4.12.0"
